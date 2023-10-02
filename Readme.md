@@ -2,8 +2,7 @@
 --------
 
 [![Minimum Prestashop Version](https://img.shields.io/badge/prestashop-%3E%3D%201.7.0-8892BF.svg?style=flat-square)](#)
-[![GitHub release](https://img.shields.io/github/v/release/SpiriitLabs/prestaclean)](https://github.com/SpiriitLabs/prestaclean)
-[![Coveralls Coverage](https://img.shields.io/coveralls/github/SpiriitLabs/prestaclean?color=4c1)](https://img.shields.io/github/issues/SpiriitLabs/prestaclean)
+[![GitHub release](https://img.shields.io/github/v/release/SpiriitLabs/prestaclean)](https://github.com/SpiriitLabs/prestaclean/releases)
 [![GitHub Issues](https://img.shields.io/github/issues/SpiriitLabs/prestaclean)](https://github.com/SpiriitLabs/prestaclean/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SpiriitLabs/prestaclean)](https://github.com/SpiriitLabs/prestaclean/network)
 [![GitHub stars](https://img.shields.io/github/stars/SpiriitLabs/prestaclean)](https://github.com/SpiriitLabs/prestaclean/stargazers)
@@ -28,7 +27,7 @@ This module is based on the discontinued official module https://github.com/Pres
 - **Products management**<br>Create dummy products, deletes products with conditions
 - **Wipe all data's**<br>Wipe all shop data's like customers, orders, products, features etc(work only on DEBUG mode)
 
-## Warning
+## Warnings
 --------
 
 Its STRONGLY recommended to backup your database before doing anything.
