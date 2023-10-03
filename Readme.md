@@ -17,6 +17,10 @@ You can also create/delete carts, orders, products, customers...
 
 This module is based on the discontinued official module https://github.com/PrestaShop/pscleaner
 
+<p align="center">
+  <img src="https://github.com/SpiriitLabs/prestaclean/blob/master/prestaclean.png?raw=true" alt="PrestaClean back office"/>
+</p>
+
 ### Features
 --------
 
