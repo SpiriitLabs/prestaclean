@@ -97,7 +97,7 @@ class CustomerCleaner
             $logs = '';
             $this->context->controller->confirmations[] = $this->module->l('Success!', 'customerCleaner');
 
-            $this->context->controller->confirmations[] = sprintf($this->module->l('%s customer(s) deleted.'), $nbDeleted);
+            $this->context->controller->confirmations[] = sprintf($this->module->l('%s customer(s) deleted.', 'customerCleaner'), $nbDeleted);
 
             return;
         }

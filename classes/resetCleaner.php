@@ -78,11 +78,13 @@ class ResetCleaner
 
         $id_home = Configuration::getMultiShopValues('PS_HOME_CATEGORY');
         $id_root = Configuration::getMultiShopValues('PS_ROOT_CATEGORY');
+        $ids_home = implode(',', array_map('intval', $id_home));
+        $ids_root = implode(',', array_map('intval', $id_root));
 
-        $res &= $this->db->delete('category', 'id_category NOT IN (' . pSQL(implode(',', array_map('intval', $id_home))) . ', ' . pSQL(implode(',', array_map('intval', $id_root))) . ')');
-        $res &= $this->db->delete('category_lang', 'id_category NOT IN (' . pSQL(implode(',', array_map('intval', $id_home))) . ', ' . pSQL(implode(',', array_map('intval', $id_root))) . ')');
-        $res &= $this->db->delete('category_shop', 'id_category NOT IN (' . pSQL(implode(',', array_map('intval', $id_home))) . ', ' . pSQL(implode(',', array_map('intval', $id_root))) . ')');
-        $res &= $this->db->delete('category_group', 'id_category NOT IN (' . pSQL(implode(',', array_map('intval', $id_home))) . ', ' . pSQL(implode(',', array_map('intval', $id_root))) . ')');
+        $res &= $this->db->delete('category', 'id_category NOT IN (' . pSQL($ids_home) . ', ' . pSQL($ids_root) . ')');
+        $res &= $this->db->delete('category_lang', 'id_category NOT IN (' . pSQL($ids_home) . ', ' . pSQL($ids_root) . ')');
+        $res &= $this->db->delete('category_shop', 'id_category NOT IN (' . pSQL($ids_home) . ', ' . pSQL($ids_root) . ')');
+        $res &= $this->db->delete('category_group', 'id_category NOT IN (' . pSQL($ids_home) . ', ' . pSQL($ids_root) . ')');
 
         $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'category');
         $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'category_lang');

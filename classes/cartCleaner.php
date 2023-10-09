@@ -120,9 +120,10 @@ class CartCleaner
     {
         $tables = self::getCartsRelatedTables();
         $res = true;
+        $carts_list = implode(',', array_map('intval', $id_carts));
 
         foreach ($tables as $table) {
-            $res &= $this->db->delete(bqSQL($table), 'id_cart IN (' . pSQL(implode(',', $id_carts)) . ')');
+            $res &= $this->db->delete(bqSQL($table), 'id_cart IN (' . pSQL($carts_list) . ')');
             if ($affected_rows = $this->db->Affected_Rows()) {
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
                 $this->output[$table] = (int) $affected_rows;

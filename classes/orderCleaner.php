@@ -131,44 +131,45 @@ class OrderCleaner
     {
         $tables = self::getOrdersRelatedTables();
         $res = true;
+        $orders_list = implode(',', array_map('intval', $id_orders));
 
         foreach ($tables as $table) {
             if ($table == 'orders') {
-                $res &= $this->db->delete('order_payment', 'order_reference IN (SELECT reference FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('order_payment', 'order_reference IN (SELECT reference FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['order_payment'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_payment');
-                $res &= $this->db->delete('cart', 'id_cart IN (SELECT id_cart FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('cart', 'id_cart IN (SELECT id_cart FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['cart'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'cart');
-                $res &= $this->db->delete('cart_product', 'id_cart IN (SELECT id_cart FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('cart_product', 'id_cart IN (SELECT id_cart FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['cart_product'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'cart_product');
             } elseif ($table == 'order_detail') {
-                $res &= $this->db->delete('order_detail_tax', 'id_order_detail IN (SELECT id_order_detail FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('order_detail_tax', 'id_order_detail IN (SELECT id_order_detail FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['order_detail_tax'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_detail_tax');
             } elseif ($table == 'order_invoice') {
-                $res &= $this->db->delete('order_invoice_payment', 'id_order_invoice IN (SELECT id_order_invoice FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('order_invoice_payment', 'id_order_invoice IN (SELECT id_order_invoice FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['order_invoice_payment'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_invoice_payment');
-                $res &= $this->db->delete('order_invoice_tax', 'id_order_invoice IN (SELECT id_order_invoice FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('order_invoice_tax', 'id_order_invoice IN (SELECT id_order_invoice FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['order_invoice_tax'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_invoice_tax');
             } elseif ($table == 'order_return') {
-                $res &= $this->db->delete('order_return_detail', 'id_order_return IN (SELECT id_order_return FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('order_return_detail', 'id_order_return IN (SELECT id_order_return FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['order_return_detail'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_return_detail');
             } elseif ($table == 'order_slip') {
-                $res &= $this->db->delete('order_slip_detail', 'id_order_slip IN (SELECT id_order_slip FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('order_slip_detail', 'id_order_slip IN (SELECT id_order_slip FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['order_slip_detail'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_slip_detail');
             } elseif ($table == 'message') {
-                $res &= $this->db->delete('message_readed', 'id_message IN (SELECT id_message FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . bqSQL(implode(',', $id_orders)) . '))');
+                $res &= $this->db->delete('message_readed', 'id_message IN (SELECT id_message FROM ' . _DB_PREFIX_ . bqSQL($table) . ' WHERE id_order IN (' . pSQL($orders_list) . '))');
                 $this->output['message_readed'] = $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'message_readed');
             }
 
-            $res &= $this->db->delete(bqSQL($table), 'id_order IN (' . bqSQL(implode(',', $id_orders)) . ')');
+            $res &= $this->db->delete(bqSQL($table), 'id_order IN (' . pSQL($orders_list) . ')');
             $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
 
             $this->output[$table] = $this->db->numRows();
