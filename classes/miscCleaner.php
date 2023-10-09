@@ -74,7 +74,7 @@ class MiscCleaner
 
         if ($deleteQuery) {
             $this->context->controller->confirmations[] = $this->module->l('Success!', 'miscCleaner');
-            $this->context->controller->confirmations[] = sprintf($this->module->l('%s mail(s) deleted.'), $nbDeleted);
+            $this->context->controller->confirmations[] = sprintf($this->module->l('%s mail(s) deleted.', 'miscCleaner'), $nbDeleted);
 
             return;
         }
@@ -548,7 +548,7 @@ class MiscCleaner
             Tools::deleteDirectory(_PS_TMP_IMG_DIR_, false);
             file_put_contents(_PS_TMP_IMG_DIR_ . 'index.php', $index);
         }
-        
+
         Context::getContext()->smarty->clearAllCache();
 
         if ($nb_files > 1) {

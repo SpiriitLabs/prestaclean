@@ -170,9 +170,8 @@ class OrderCleaner
             }
 
             $res &= $this->db->delete(bqSQL($table), 'id_order IN (' . pSQL($orders_list) . ')');
-            $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
-
             $this->output[$table] = $this->db->numRows();
+            $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
         }
 
         return $res;
@@ -236,7 +235,7 @@ class OrderCleaner
             $history->save();
         }
 
-        Context::getContext()->controller->confirmations[] = sprintf('%d order(s) successfully created.', $nb);
+        Context::getContext()->controller->confirmations[] = sprintf($this->module->l('%d order(s) successfully created.', 'orderCleaner'), $nb);
     }
 
     /***********************************************************************************************************************************************
@@ -250,43 +249,43 @@ class OrderCleaner
     {
         $tables = self::getOrdersRelatedTables();
         $res = true;
-        $this->output[$this->module->l('Orphans cleaned')] = 0;
+        $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] = 0;
         foreach ($tables as $table) {
             if ($table == 'orders') {
                 $res &= Db::getInstance()->delete('order_payment', 'order_reference NOT IN (SELECT reference FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_payment');
                 $res &= Db::getInstance()->delete('cart_product', 'id_cart NOT IN (SELECT id_cart FROM ' . _DB_PREFIX_ . 'cart)');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'cart_product');
                 continue;
             } elseif ($table == 'order_detail') {
                 $res &= Db::getInstance()->delete('order_detail_tax', 'id_order_detail NOT IN (SELECT id_order_detail FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_detail_tax');
             } elseif ($table == 'order_invoice') {
                 $res &= Db::getInstance()->delete('order_invoice_payment', 'id_order_invoice NOT IN (SELECT id_order_invoice FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_invoice_payment');
                 $res &= Db::getInstance()->delete('order_invoice_tax', 'id_order_invoice NOT IN (SELECT id_order_invoice FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_invoice_tax');
             } elseif ($table == 'order_return') {
                 $res &= Db::getInstance()->delete('order_return_detail', 'id_order_return NOT IN (SELECT id_order_return FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_return_detail');
             } elseif ($table == 'order_slip') {
                 $res &= Db::getInstance()->delete('order_slip_detail', 'id_order_slip NOT IN (SELECT id_order_slip FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'order_slip_detail');
             } elseif ($table == 'message') {
                 $res &= Db::getInstance()->delete('message_readed', 'id_message NOT IN (SELECT id_message FROM ' . _DB_PREFIX_ . bqSQL($table) . ')');
-                $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+                $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
                 $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'message_readed');
             }
 
             $res &= Db::getInstance()->delete(bqSQL($table), 'id_order NOT IN (SELECT id_order FROM ' . _DB_PREFIX_ . 'orders)');
-            $this->output[$this->module->l('Orphans cleaned')] += $this->db->numRows();
+            $this->output[$this->module->l('Orphans cleaned', 'orderCleaner')] += $this->db->numRows();
             $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
         }
 
