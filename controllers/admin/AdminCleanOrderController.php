@@ -77,8 +77,8 @@ class AdminCleanOrderController extends ModuleAdminController
             $orderCleaner = new OrderCleaner();
             $orderCleaner->date_from = Tools::getValue($this->module->config_name . '_DATE_FROM', null);
             $orderCleaner->date_to = Tools::getValue($this->module->config_name . '_DATE_TO', null);
-            $orderCleaner->status = implode(',', Tools::getValue($this->module->config_name . '_STATUS', []));
-            $orderCleaner->shops = implode(',', Tools::getValue($this->module->config_name . '_SHOP_ORDERS', []));
+            $orderCleaner->status = implode(',', array_map('intval', Tools::getValue($this->module->config_name . '_STATUS', [])));
+            $orderCleaner->shops = implode(',', array_map('intval', Tools::getValue($this->module->config_name . '_SHOP_ORDERS', [])));
             $orderCleaner->deleteOrders();
         }
 

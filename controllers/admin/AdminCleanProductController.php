@@ -77,9 +77,9 @@ class AdminCleanProductController extends ModuleAdminController
             $productCleaner = new ProductCleaner();
             $productCleaner->date_from = Tools::getValue($this->module->config_name . '_PRODUCT_DATE_FROM', null);
             $productCleaner->date_to = Tools::getValue($this->module->config_name . '_PRODUCT_DATE_TO', null);
-            $productCleaner->shops = implode(',', Tools::getValue($this->module->config_name . '_PRODUCT_SHOP', []));
+            $productCleaner->shops = implode(',', array_map('intval', Tools::getValue($this->module->config_name . '_PRODUCT_SHOP', [])));
             $productCleaner->types = Tools::getValue($this->module->config_name . '_PRODUCT_TYPE', []);
-            $productCleaner->categories = implode(',', Tools::getValue($this->module->config_name . '_PRODUCT_CATEGORIES', []));
+            $productCleaner->categories = implode(',', array_map('intval', Tools::getValue($this->module->config_name . '_PRODUCT_CATEGORIES', [])));
             $productCleaner->active = Tools::getValue($this->module->config_name . '_PRODUCT_ACTIVE', null);
             $productCleaner->deleteProducts();
         }

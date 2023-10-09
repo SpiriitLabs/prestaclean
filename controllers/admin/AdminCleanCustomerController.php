@@ -77,7 +77,7 @@ class AdminCleanCustomerController extends ModuleAdminController
             $customerCleaner = new CustomerCleaner();
             $customerCleaner->date_from = Tools::getValue($this->module->config_name . '_CUSTOMER_DATE_FROM', null);
             $customerCleaner->date_to = Tools::getValue($this->module->config_name . '_CUSTOMER_DATE_TO', null);
-            $customerCleaner->shops = implode(',', Tools::getValue($this->module->config_name . '_CUSTOMER_SHOP', []));
+            $customerCleaner->shops = implode(',', array_map('intval', Tools::getValue($this->module->config_name . '_CUSTOMER_SHOP', [])));
             $customerCleaner->guest = Tools::getValue($this->module->config_name . '_CUSTOMER_GUEST', null);
             $customerCleaner->never_ordered = Tools::getValue($this->module->config_name . '_CUSTOMER_NEVER_ORDERED', null);
             $customerCleaner->deleteCustomers();

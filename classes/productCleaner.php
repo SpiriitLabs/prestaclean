@@ -103,7 +103,7 @@ class ProductCleaner
         if ($productsDelete) {
             $logs = '';
             $this->context->controller->confirmations[] = $this->module->l('Success!', 'productCleaner');
-            $this->context->controller->confirmations[] = sprintf($this->module->l('%s product(s) deleted.'), $nbDeleted);
+            $this->context->controller->confirmations[] = sprintf($this->module->l('%s product(s) deleted.', 'productCleaner'), $nbDeleted);
 
             return;
         }

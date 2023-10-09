@@ -77,7 +77,7 @@ class AdminCleanCartController extends ModuleAdminController
             $cartCleaner = new CartCleaner();
             $cartCleaner->date_from = Tools::getValue($this->module->config_name . '_DATE_FROM', null);
             $cartCleaner->date_to = Tools::getValue($this->module->config_name . '_DATE_TO', null);
-            $cartCleaner->shops = implode(',', Tools::getValue($this->module->config_name . '_SHOP_CARTS', []));
+            $cartCleaner->shops = implode(',', array_map('intval', Tools::getValue($this->module->config_name . '_SHOP_CARTS', [])));
             $cartCleaner->deleteCarts();
         }
 
