@@ -2,7 +2,7 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{prestaclean}prestashop>prestaclean_0014be3e27e16d35e1440eb29471127e'] = 'Nettoyeur Prestashop & Maintenance';
+$_MODULE['<{prestaclean}prestashop>prestaclean_0014be3e27e16d35e1440eb29471127e'] = 'Nettoyeur Prestashop et Maintenance';
 $_MODULE['<{prestaclean}prestashop>prestaclean_29f9adc8233ddc879efe39e25d4bac3d'] = 'Gardez votre base de données PrestaShop saine, supprimez les logs et nettoyez vos commandes produits et plus encore';
 $_MODULE['<{prestaclean}prestashop>prestaclean_7b65e9c0a50646a6268d973d14175a35'] = 'Je comprend que cette action est irréversible, continuer ?';
 $_MODULE['<{prestaclean}prestashop>prestaclean_979f268037f916ddd4701b72865726b2'] = 'Commandes supprimés avec succès';
@@ -11,21 +11,26 @@ $_MODULE['<{prestaclean}prestashop>productcleaner_94888232d4efddc42e39814bbfcf63
 $_MODULE['<{prestaclean}prestashop>productcleaner_402e7a087747cb56c718bde84651f96a'] = 'Succès!';
 $_MODULE['<{prestaclean}prestashop>productcleaner_67c7fcdf5aec50e7fe016943ec2aefa1'] = '%s produit(s) supprimé(s)';
 $_MODULE['<{prestaclean}prestashop>productcleaner_7e524ff51296689fdf2f3a9bb966b67c'] = 'Une erreur s\'est produite pendant la suppression';
+$_MODULE['<{prestaclean}prestashop>productcleaner_7f298b04ab392872b5f132e199a994b8'] = 'Produit généré num %d';
+$_MODULE['<{prestaclean}prestashop>productcleaner_181ba1a9e1a38f1a83277046cdbbc2bc'] = '%d produit(s) créés avec succès.';
 $_MODULE['<{prestaclean}prestashop>cartcleaner_94888232d4efddc42e39814bbfcf63fb'] = 'Rien a supprimer';
 $_MODULE['<{prestaclean}prestashop>cartcleaner_402e7a087747cb56c718bde84651f96a'] = 'Succès';
 $_MODULE['<{prestaclean}prestashop>cartcleaner_7194367ccfba55352c9bbad19c538c4a'] = '%s: %d.';
 $_MODULE['<{prestaclean}prestashop>cartcleaner_7e524ff51296689fdf2f3a9bb966b67c'] = 'Une erreur s\'est produite pendant le processus';
 $_MODULE['<{prestaclean}prestashop>cartcleaner_82fa59aff897e76fdeb5568417b1443e'] = 'Pas assez de données de base pour créer des paniers fictifs(clients, adresses, transporteurs)';
+$_MODULE['<{prestaclean}prestashop>cartcleaner_f89ca3ec5e8a5f47ea13319c4b9edc04'] = '%d panier(s) supprimés avec succès.';
 $_MODULE['<{prestaclean}prestashop>cartcleaner_e1c99270974d8dbbe03069eecda6f70d'] = 'Données orphelines nettoyés';
 $_MODULE['<{prestaclean}prestashop>customercleaner_94888232d4efddc42e39814bbfcf63fb'] = 'Rien a supprimer';
 $_MODULE['<{prestaclean}prestashop>customercleaner_402e7a087747cb56c718bde84651f96a'] = 'Succès!';
 $_MODULE['<{prestaclean}prestashop>customercleaner_fa4173f2ac8d6aaf560406fd3f4a7b27'] = '%s client(s) supprimé(s)';
 $_MODULE['<{prestaclean}prestashop>customercleaner_7e524ff51296689fdf2f3a9bb966b67c'] = 'Une erreur s\'est produite pendant le processus';
+$_MODULE['<{prestaclean}prestashop>customercleaner_ad8b2d7d8ce2f4a7da2e575a4b34ba15'] = '%d client(s) créés avec succès.';
 $_MODULE['<{prestaclean}prestashop>ordercleaner_94888232d4efddc42e39814bbfcf63fb'] = 'Rien a supprimer';
 $_MODULE['<{prestaclean}prestashop>ordercleaner_402e7a087747cb56c718bde84651f96a'] = 'Succès!';
 $_MODULE['<{prestaclean}prestashop>ordercleaner_7194367ccfba55352c9bbad19c538c4a'] = '%s: %d.';
 $_MODULE['<{prestaclean}prestashop>ordercleaner_7e524ff51296689fdf2f3a9bb966b67c'] = 'Une erreur s\'est produite pendant le processus';
 $_MODULE['<{prestaclean}prestashop>ordercleaner_3e82cc6a41a49e2e3b499ca4a101ff70'] = 'Pas assez de données de base pour créer des commandes fictives(clients, adresses, transporteurs, status de commandes)';
+$_MODULE['<{prestaclean}prestashop>ordercleaner_2c4950fee01916da7d6d516b853cc2d5'] = '%d commande(s) créés avec succès.';
 $_MODULE['<{prestaclean}prestashop>ordercleaner_e1c99270974d8dbbe03069eecda6f70d'] = 'Données orphelines nettoyés';
 $_MODULE['<{prestaclean}prestashop>misccleaner_402e7a087747cb56c718bde84651f96a'] = 'Succès!';
 $_MODULE['<{prestaclean}prestashop>misccleaner_9cfa52679494dd160e5696e9db24d100'] = '%s email(s) supprimés.';

@@ -144,7 +144,7 @@ class ProductCleaner
     {
         for ($i = 1; $i <= $nb; ++$i) {
             $rand_str = substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', 5)), 0, 5);
-            $name = sprintf('Product generated %d', rand(100, 99999));
+            $name = sprintf($this->module->l('Product generated %d', 'productCleaner'), rand(100, 99999));
 
             $product = new Product();
             $product->name = $this->createMultiLangField($name);
@@ -164,13 +164,13 @@ class ProductCleaner
 
             $categories = array_column(Category::getSimpleCategoriesWithParentInfos($this->lang->id), 'id_category');
             $default_category = $categories[array_rand($categories)];
-            $categories = [Configuration::get('PS_HOME_CATEGORY'), $default_category];
+            $categories = [$default_category];// Can add more id's of categories id needed
             $product->addToCategories($categories);
             $product->id_category_default = $default_category;
             $product->update();
         }
 
-        Context::getContext()->controller->confirmations[] = sprintf('%d product(s) successfully created.', $nb);
+        Context::getContext()->controller->confirmations[] = sprintf($this->module->l('%d product(s) successfully created.', 'productCleaner'), $nb);
     }
 
     /***********************************************************************************************************************************************

@@ -2,7 +2,7 @@
 <module>
 	<name>prestaclean</name>
 	<displayName><![CDATA[Prestashop Cleaner and Maintenance toolkit]]></displayName>
-	<version><![CDATA[1.0.0]]></version>
+	<version><![CDATA[1.0.1]]></version>
 	<description><![CDATA[Keep your Prestashop database and files clean, get out of old logs, clean up unwanted orders and more]]></description>
 	<author><![CDATA[Spiriit]]></author>
 	<tab><![CDATA[administration]]></tab>

@@ -167,6 +167,6 @@ class CustomerCleaner
             $address->save();
         }
 
-        Context::getContext()->controller->confirmations[] = $this->module->l(sprintf('%d customer(s) successfully created.', $nb), 'customerCleaner');
+        Context::getContext()->controller->confirmations[] = sprintf($this->module->l('%d customer(s) successfully created.', 'customerCleaner'), $nb);
     }
 }

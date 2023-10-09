@@ -125,10 +125,9 @@ class CartCleaner
         foreach ($tables as $table) {
             $res &= $this->db->delete(bqSQL($table), 'id_cart IN (' . pSQL($carts_list) . ')');
             if ($affected_rows = $this->db->Affected_Rows()) {
-                $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
                 $this->output[$table] = (int) $affected_rows;
+                $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
             }
-            $this->output[$table] = (int) $this->db->numRows();
         }
 
         return $res;
@@ -170,7 +169,7 @@ class CartCleaner
             }
         }
 
-        Context::getContext()->controller->confirmations[] = $this->module->l(sprintf('%d cart(s) successfully created.', $nb), 'cartCleaner');
+        Context::getContext()->controller->confirmations[] = sprintf($this->module->l('%d cart(s) successfully created.', 'cartCleaner'), $nb);
     }
 
     /**
@@ -179,12 +178,12 @@ class CartCleaner
     public function cleanOrphans()
     {
         $res = true;
-        $this->output[$this->module->l('Orphans cleaned')] = 0;
+        $this->output[$this->module->l('Orphans cleaned', 'cartCleaner')] = 0;
 
         $res &= Db::getInstance()->delete('cart_product', 'id_cart NOT IN (SELECT id_cart FROM ' . _DB_PREFIX_ . 'cart)');
-        $this->output[$this->module->l('Orphans cleaned')] += (int) $this->db->numRows();
+        $this->output[$this->module->l('Orphans cleaned', 'cartCleaner')] += (int) $this->db->numRows();
         $res &= Db::getInstance()->delete('cart', 'id_cart NOT IN (SELECT DISTINCT(id_cart) FROM ' . _DB_PREFIX_ . 'cart_product)');
-        $this->output[$this->module->l('Orphans cleaned')] += (int) $this->db->numRows();
+        $this->output[$this->module->l('Orphans cleaned', 'cartCleaner')] += (int) $this->db->numRows();
 
         $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'cart_product');
         $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . 'cart');
