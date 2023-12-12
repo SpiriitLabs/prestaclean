@@ -39,7 +39,7 @@ class PrestaClean extends Module
     {
         $this->name = 'prestaclean';
         $this->tab = 'administration';
-        $this->version = '1.0.1';
+        $this->version = '1.0.2';
         $this->author = 'Spiriit';
         $this->need_instance = 0;
         $this->bootstrap = true;

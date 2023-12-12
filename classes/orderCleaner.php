@@ -189,7 +189,13 @@ class OrderCleaner
     {
         for ($o = 1; $o <= $nb; ++$o) {
             $customer_id = Db::getInstance()->getValue('SELECT id_customer FROM `' . _DB_PREFIX_ . 'customer` ORDER BY RAND()');
-            $address_id = Db::getInstance()->getValue('SELECT id_address FROM `' . _DB_PREFIX_ . 'address` ORDER BY RAND()');
+            $sql = new DbQuery();
+            $sql->select('a.id_address');
+            $sql->from('address', 'a');
+            $sql->innerJoin('country', 'c', 'c.id_country = a.id_country');
+            $sql->where('c.active = 1');
+            $sql->orderBy('RAND()');
+            $address_id = Db::getInstance()->getValue($sql);
             $carrier_id = Db::getInstance()->getValue('SELECT id_carrier FROM `' . _DB_PREFIX_ . 'carrier` ORDER BY RAND()');
             $state_id = Db::getInstance()->getValue('SELECT id_order_state FROM `' . _DB_PREFIX_ . 'order_state` ORDER BY RAND()');
 
@@ -210,7 +216,8 @@ class OrderCleaner
 
             $new_cart->add();
 
-            for ($p = 1; $p <= 5; ++$p) {
+            $products = Db::getInstance()->executeS('SELECT id_product FROM ' . _DB_PREFIX_ . 'product ORDER BY RAND() LIMIT 5');
+            foreach (array_column($products, 'id_product') as $p) {
                 $result = $new_cart->updateQty(rand(1, 5), $p);
             }
 
@@ -231,6 +238,7 @@ class OrderCleaner
 
             $history = new OrderHistory();
             $history->id_order = (int) $id_order;
+            $history->id_order_state = (int) $state_id;
             $history->changeIdOrderState((int) $state_id, (int) $history->id_order);
             $history->save();
         }
